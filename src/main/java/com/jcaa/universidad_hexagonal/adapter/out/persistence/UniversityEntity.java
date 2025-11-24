@@ -1,8 +1,15 @@
-package com.jcaa.universidad_hexagonal.core.domain;
+package com.jcaa.universidad_hexagonal.adapter.out.persistence;
 
-public class Universidad {
+import jakarta.persistence.*;
 
+@Entity
+@Table(name = "universidades")
+public class UniversityEntity {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String nombre;
     private String categoria;
     private String web;
@@ -14,11 +21,11 @@ public class Universidad {
     private int numeroCarreras;
     private int numSedes;
 
-    public Universidad() {}
+    public UniversityEntity() {}
 
-    public Universidad(Long id, String nombre, String categoria, String web, String rector,
-                       String email, String acceso, String telefono, String ciudad,
-                       int numeroCarreras, int numSedes) {
+    public UniversityEntity(Long id, String nombre, String categoria, String web,
+                            String rector, String email, String acceso, String telefono,
+                            String ciudad, int numeroCarreras, int numSedes) {
         this.id = id;
         this.nombre = nombre;
         this.categoria = categoria;

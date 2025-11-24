@@ -1,4 +1,9 @@
 package com.jcaa.universidad_hexagonal.core.port.in;
 
-public class GetUniversityUseCase {
+import com.jcaa.universidad_hexagonal.core.domain.Universidad;
+import java.util.List;
+
+public interface GetUniversityUseCase {
+    Universidad findById(Long id);
+    List<Universidad> findAll();
 }
