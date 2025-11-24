@@ -2,6 +2,7 @@ package com.jcaa.universidad_hexagonal.adapter.in.web;
 
 import com.jcaa.universidad_hexagonal.core.domain.Universidad;
 import com.jcaa.universidad_hexagonal.core.port.in.*;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -27,28 +28,27 @@ public class UniversityController {
         this.deleteUseCase = deleteUseCase;
     }
 
-    @PostMapping
-    public Universidad create(@RequestBody Universidad universidad) {
-        return createUseCase.create(universidad);
-    }
-
-    @GetMapping("/{id}")
-    public Universidad findById(@PathVariable Long id) {
-        return getUseCase.findById(id);
-    }
-
     @GetMapping
     public List<Universidad> findAll() {
         return getUseCase.findAll();
     }
 
+    @PostMapping
+    public Universidad create(@RequestBody Universidad universidad) {
+        return createUseCase.create(universidad);
+    }
+
     @PutMapping("/{id}")
-    public Universidad update(@PathVariable Long id, @RequestBody Universidad universidad) {
-        return updateUseCase.update(id, universidad);
+    public ResponseEntity<Universidad> update(
+            @PathVariable Long id,
+            @RequestBody Universidad universidad
+    ) {
+        return ResponseEntity.ok(updateUseCase.update(id, universidad));
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id) {
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
         deleteUseCase.delete(id);
+        return ResponseEntity.noContent().build();
     }
 }
